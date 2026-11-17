@@ -1,0 +1,100 @@
+/* 工作区入口沿用证据盘的中性石墨底色与冷灰蓝主操作。
+   中文走原思源黑体栈，地址、模型标识用原等宽栈；紧凑单列，薄线和 4px 控件圆角。 */
+.workspace-gate {
+  width: min(100%, 560px);
+  margin-inline: auto;
+  padding: clamp(16px, 4vw, 32px);
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.workspace-intro { margin-bottom: 20px; }
+.workspace-intro h1 { margin: 4px 0 8px; font-size: clamp(25px, 4vw, 32px); }
+.workspace-intro h1:focus { outline: none; }
+.workspace-description { color: var(--muted); text-wrap: pretty; }
+.workspace-login-method { display: flex; gap: 20px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+.workspace-login-method > button {
+  min-height: 44px;
+  padding: 0 2px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 650;
+}
+.workspace-login-method > button:not(:disabled):hover { color: var(--ink); }
+.workspace-login-method > button[aria-pressed="true"] { border-bottom-color: var(--accent); color: var(--ink); }
+
+.workspace-fields { min-inline-size: 0; display: grid; gap: 12px; margin: 0; padding: 0; border: 0; }
+.workspace-fields > .primary, .workspace-fields > .secondary { width: 100%; }
+.workspace-field { display: grid; min-width: 0; gap: 5px; font-weight: 650; }
+.workspace-field > input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface-low);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 400;
+}
+.workspace-field > input:is([name="base_url"], [name="model"]) { font-family: var(--mono); }
+.workspace-field > input::placeholder { color: var(--muted); }
+.workspace-field > input:disabled { opacity: .72; }
+.workspace-presets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: -4px; }
+.workspace-preset {
+  min-height: 44px;
+  padding: 3px 9px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  background: var(--surface-low);
+  font-size: 12px;
+}
+.workspace-preset:not(:disabled):hover { color: var(--ink); border-color: var(--line-strong); }
+.workspace-preset[aria-pressed="true"] { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+.workspace-help, .workspace-notice { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; text-wrap: pretty; }
+.workspace-account-switch { display: flex; align-items: center; gap: 3px; margin-top: 8px; color: var(--muted); font-size: 13px; }
+.workspace-account-switch > button { color: var(--accent); }
+.workspace-field-hint { margin-top: -5px; }
+.workspace-notice { padding: 9px 11px; border: 1px solid var(--line); background: var(--surface-low); }
+.workspace-edit-note { margin-bottom: 8px; }
+.workspace-error { margin: 0 0 12px; }
+.workspace-main-error { margin: 0 0 12px; }
+
+.workspace-content[hidden] { display: none !important; }
+.workspace-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 12px;
+  padding: 1px 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.workspace-identity { display: flex; min-width: 0; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding-block: 4px; }
+.workspace-identity > strong { min-width: 0; overflow-wrap: anywhere; }
+.workspace-identity > .pill { align-self: auto; }
+.workspace-actions { display: flex; flex-wrap: wrap; gap: 0 12px; }
+.workspace-form .workspace-actions { justify-content: space-between; margin-top: -8px; }
+.workspace-text-button {
+  min-height: 44px;
+  padding: 2px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 650;
+}
+.workspace-text-button:not(:disabled):hover { text-decoration: underline; text-underline-offset: 3px; }
+.workspace-text-button:disabled, .workspace-preset:disabled { opacity: .65; }
+
+@media (max-width: 440px) {
+  .workspace-bar { padding-inline: 10px; }
+  .workspace-bar .workspace-actions { gap: 4px; }
+}

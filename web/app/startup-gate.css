@@ -1,0 +1,61 @@
+/* Production brand opening: the existing graphite background and ice-blue
+   accent; one bounded canvas, a standard-clear 28–72px headline, no imagery,
+   loading claims, decorative dashboard numbers or permanently running effect. */
+.startup-screen {
+  --startup-title-opacity: 0;
+  --startup-subtitle-opacity: 0;
+  --startup-out-opacity: 1;
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  min-width: 0;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #121418;
+  color: #ebedf1;
+  font-family: var(--sans);
+  isolation: isolate;
+}
+.startup-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.startup-copy { position: absolute; inset: 0; opacity: var(--startup-out-opacity); pointer-events: none; }
+.startup-title {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  max-width: calc(100vw - 32px);
+  white-space: nowrap;
+  font-size: clamp(28px, 5.6vw, 72px);
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: .04em;
+  color: #dce7f4;
+  opacity: var(--startup-title-opacity);
+}
+.startup-subtitle {
+  position: absolute;
+  top: calc(46% + clamp(38px, 5.8vw, 72px));
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding-inline: 20px;
+  width: max-content;
+  max-width: 100%;
+  text-align: center;
+  font-size: clamp(12px, 1.4vw, 16px);
+  line-height: 1.8;
+  letter-spacing: .13em;
+  color: #afc1db;
+  opacity: var(--startup-subtitle-opacity);
+}
+.startup-screen:focus { outline: none; }
+.startup-instruction { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+@media (max-width: 700px) {
+  .startup-title { font-size: clamp(28px, 7vw, 34px); }
+  .startup-subtitle { font-size: 12px; letter-spacing: .04em; top: calc(46% + 44px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .startup-canvas { display: none; }
+  .startup-title, .startup-subtitle { opacity: 1; }
+}

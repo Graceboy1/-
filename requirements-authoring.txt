@@ -1,0 +1,3 @@
+# Optional PDF authoring and validation only; not required by the web runtime.
+reportlab>=4,<5
+pypdf>=5,<7
