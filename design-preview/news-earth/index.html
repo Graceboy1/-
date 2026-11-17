@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- 设计合同：沿用石墨 #121418、冷蓝 #afc1db，红 #f4787f/绿 #67c89d 仅表示板块影响。
+     中文 14–16px / 思源黑体；0.5px 微光边框，4/8/12/20/28 间距。
+     正式mode=live读取真实新闻，AI仅经逐条主动点击；独立预览仍为虚构新闻。
+     已采用第二版轨道观测台；关联区只保留股票列表，随新闻/板块/席位过滤，不绘制圆球连线。
+     旧三版通过 compare=1 保留；新闻列表永远全量，不因相机转动而过滤。
+     地点显示国家/省市、按已提供的城市坐标定位；未明确的行政层级不补猜。 -->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark"><title>智慧交易助手 · 全球新闻</title>
+  <link rel="icon" href="data:,"><link rel="stylesheet" href="earth.css">
+  <script defer src="vendor/d3-array.min.js"></script><script defer src="vendor/d3-geo.min.js"></script>
+  <script defer src="vendor/topojson-client.min.js"></script><script defer src="geo-core.js"></script>
+  <script defer src="sphere-core.js"></script><script defer src="earth-renderer.js"></script><script defer src="earth-app.js"></script>
+</head>
+<body data-view="orbit" data-level="earth" data-compare="false">
+  <a class="skip" href="#news-list">跳到全部新闻</a>
+  <header class="header"><div class="brand"><span class="mark">智</span><div><strong>智慧交易助手</strong></div></div>
+    <div class="adopted-view">全球新闻</div>
+    <nav class="variants" aria-label="三版地球设计"><button data-view="atlas" aria-pressed="false"><em>01</em> 地图资讯台</button><button data-view="orbit" aria-pressed="true"><em>02</em> 轨道观测台</button><button data-view="horizon" aria-pressed="false"><em>03</em> 地平线视窗</button></nav>
+    <span class="demo" id="data-status" title="当前新闻、地点及股票均为模拟数据，尚未接入实时新闻或行情。">数据状态：模拟</span>
+  </header>
+  <main class="workspace">
+    <aside class="news-sidebar" aria-label="全部新闻列表">
+      <div class="list-heading"><h1>全球快讯</h1><span id="news-count">—</span></div>
+      <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索新闻、国家、省市" aria-label="搜索新闻、国家、省市" maxlength="80"></label>
+      <section id="live-controls" class="live-controls" aria-label="新闻更新状态" hidden>
+        <div class="live-update-row"><span>真实新闻 · 每5分钟检查</span><button id="refresh-news" type="button">更新新闻</button></div>
+        <p id="live-status" role="status" aria-live="polite">正在读取新闻缓存…</p>
+        <details class="news-sources"><summary>来源状态</summary><div id="source-status"></div></details>
+      </section>
+      <div id="news-list" class="news-list" tabindex="0"><p class="loading">正在读取新闻…</p></div>
+      <div id="news-pagination" class="news-pagination" hidden><button id="previous-news" type="button">上一页</button><span id="page-number">—</span><button id="next-news" type="button">下一页</button></div>
+    </aside>
+    <section id="scene-shell" class="scene-shell" aria-label="地理新闻空间">
+      <div id="globe-stage" class="globe-stage" tabindex="0" role="region" aria-label="可拖动旋转的新闻地球，方向键也可旋转">
+        <p id="camera-status" class="sr-only">定位中…</p>
+        <div class="corner-coordinate"><span id="coordinate">—</span></div>
+        <article id="focus-card" class="focus-card" aria-label="选中新闻详情"></article>
+        <div id="location-group" class="location-group" hidden></div>
+        <div class="map-bottom"><div class="map-buttons"><button data-turn="left" aria-label="向西旋转">←</button><button data-turn="right" aria-label="向东旋转">→</button><button id="locate" aria-label="重新定位当前新闻">定位</button></div></div>
+      </div>
+      <section id="inner-space" class="inner-space" hidden aria-label="当前新闻的板块和股票关联">
+        <div class="inner-toolbar"><button id="back">← 返回新闻页</button><nav id="breadcrumbs" aria-label="关联层级"></nav></div>
+        <div class="seat-controls"><label>筛选席位 <select id="seat" aria-label="当前筛选席位"></select></label><label><input id="eligible" type="checkbox" checked>仅看门槛通过</label></div>
+        <section id="relation-detail" class="relation-detail" aria-label="关联股票列表"></section>
+        <p class="inner-legend"><i class="positive"></i>利好 <i class="adverse"></i>不利 <i class="neutral"></i>混合 / 未知</p>
+      </section>
+      <div id="load-error" class="load-error" hidden></div>
+    </section>
+  </main>
+  <footer><span>关联分析仅供研究参考，不构成投资建议。</span><span>底图：<a href="https://github.com/topojson/world-atlas" target="_blank" rel="noreferrer">Natural Earth / world-atlas</a> · 地理示意，非标准地图</span></footer>
+  <p id="announcer" class="sr-only" role="status" aria-live="polite"></p>
+</body>
+</html>
